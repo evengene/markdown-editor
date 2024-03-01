@@ -1,0 +1,24 @@
+.textPreview {
+  margin: 24px;
+}
+
+blockquote {
+  border-left: 4px solid #E46643;
+  padding: 24px 32px 24px 20px;
+  background: #2B2D31;
+  color: #fff;
+  margin-left: 0;
+  border-radius: 4px;
+}
+
+a {
+  color: white;
+}
+
+pre {
+  background: #2B2D31;
+  padding: 24px;
+  border-radius: 4px;
+  overflow-x: auto;
+  color: white;
+}

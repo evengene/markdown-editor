@@ -44,3 +44,13 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+## Markdown Editor Features:
+- [x] Live Markdown Preview
+- [x] Ability to save/ open markdown files
+- [x] Edit existing files
+- [x] Create new markdown files
+- [x] Delete files
+- Day/Night mode
+

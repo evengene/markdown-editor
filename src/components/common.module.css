@@ -1,0 +1,21 @@
+.container {
+  flex: 1;
+  height: calc(100% - 46px);
+}
+
+.title {
+  width: 100%;
+  background: #1D1F22;
+  color: #C1C4CB;
+  display: flex;
+  height: 42px;
+  align-items: center;
+}
+
+
+.title h1 {
+  font-size: 14px;
+  text-transform: uppercase;
+  margin: 16px;
+  letter-spacing: 2px;
+}
