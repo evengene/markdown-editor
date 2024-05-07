@@ -1,7 +1,5 @@
 import express from 'express';
-import path from 'node:path';
-import fs from 'fs/promises';
-import { writeData } from './dataService';
+import getDb from '../atlasClient';
 
 const router = express.Router();
 
@@ -9,20 +7,13 @@ const router = express.Router();
 router.post(`/`, async (req, res, next) => {
   try {
     console.log(`Received ${req.method} request for ${req.url} with body: ${req.body} SAVEEEE`);
-    const dataFilePath = path.join(__dirname, '..', '..', 'data.json');
-    console.log(dataFilePath);
-    const data = await fs.readFile(dataFilePath, 'utf8');
-    const jsonData = JSON.parse(data);
-    console.log(jsonData);
     const { id, name, content } = req.body;
-    console.log(id, name, content)
-    jsonData.push({
-      id,
-      name,
-      content: content || '',
-    });
-    await writeData(dataFilePath, jsonData);
-    res.json({ message: 'Data saved' });
+
+    let database = await getDb();
+    let collection = database.collection('sample');
+    await collection.updateOne({ id }, { $set: { name, content } });
+
+    res.send(`File: "${name}" saved`);
     console.log(res.statusCode)
   } catch (err) {
     next(err);

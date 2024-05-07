@@ -3,7 +3,8 @@
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
-  height: calc(100vh - 72px);
+  /*height: calc(100vh - 72px);*/
+  height: auto;
   background-color: #151619;
   color: white;
   flex: 0 0 100%;

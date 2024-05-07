@@ -1,4 +1,5 @@
 import express, { Express } from "express";
+import cors from 'cors';
 
 import readRouter from './src/server/routes/read';
 import updateRouter from './src/server/routes/update';
@@ -18,6 +19,9 @@ app.use(( req, res, next ) => {
   console.log(`Received ${req.method} request for ${req.url}`);
   next();
 });
+app.use(cors({
+  origin: 'http://localhost:3000',
+}));
 
 app.use(express.json());
 app.use(express.static('public'));
@@ -28,19 +32,6 @@ app.use('/create', createRouter);
 app.use('/update', updateRouter);
 app.use('/delete', deleteRouter);
 app.use('/save', saveRouter)
-
-
-// async function run() {
-//   try {
-//     let database = await getDb();
-//     const collection = database.collection('sample');
-//     const data = await collection.find().toArray();
-//     console.log(data);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
-// run().catch(console.dir);
 
 app.use(( req, res, next ) => {
   res.on('finish', () => {
