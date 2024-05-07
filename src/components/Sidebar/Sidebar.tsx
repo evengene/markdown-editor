@@ -2,13 +2,14 @@ import React, { useEffect } from 'react';
 import { useAppSelector, useDispatch } from '../../store/store';
 import styles from './Sidebar.module.css';
 import docIcon from '../../assets/icon-document.svg';
-import { readDocument, selectDocument, createDocument } from "../../store/markdownSlice";
+import { readDocument, selectDocument, createDocument } from '../../store/markdownSlice';
+import { EMPTY_STRING } from '../../constants/shared';
 
 export const Sidebar = () => {
 
   const dispatch = useDispatch();
-  const { sidebarOpen } = useAppSelector(( state ) => state.sidebar);
-  const { documents } = useAppSelector(( state ) => state.markdown);
+  const { sidebarOpen } = useAppSelector((state) => state.sidebar);
+  const { documents } = useAppSelector((state) => state.markdown);
 
 
   useEffect(() => {
@@ -16,9 +17,9 @@ export const Sidebar = () => {
       console.log('Sidebar rendered');
       dispatch(readDocument());
     }
-  }, [sidebarOpen]);
+  }, [dispatch, sidebarOpen]);
 
-  const handleDocClick = ( id: string ) => () => {
+  const handleDocClick = (id: string) => () => {
     console.log('clicked');
     console.log(id);
     dispatch(selectDocument(id));
@@ -29,7 +30,7 @@ export const Sidebar = () => {
   }
 
   return (
-    <aside className={`${styles.sidebar} ${sidebarOpen ? styles.open : ''}`}>
+    <aside className={`${styles.sidebar} ${sidebarOpen ? styles.open : EMPTY_STRING}`}>
       <div className={styles.wrapper}>
         <h1 className={styles.title}>Markdown</h1>
         <h2 className={styles.header}>My Documents</h2>
@@ -39,9 +40,9 @@ export const Sidebar = () => {
         </button>
         {documents.length > 0 && (
           <ul className={styles.documentList}>
-            {documents.map(( doc ) => (
+            {documents.map((doc) => (
               <li key={doc.id} className={styles.listItem} onClick={handleDocClick(doc.id)}>
-                <img className={styles.icon} src={docIcon} alt="document icon" />
+                <img className={styles.icon} src={docIcon} alt="document icon"/>
                 <div className={styles.documentInfo}>
                   <p className={styles.documentDate}>{doc.createdAt}</p>
                   <h3 className={styles.documentTitle}>{doc.name}</h3>

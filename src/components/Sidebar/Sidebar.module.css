@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   bottom: 0;
-  background-color: #1D1F22;
+  background-color: #1d1f22;
   transition: transform 0.3s ease-out;
   color: white;
   width: 0;
@@ -39,7 +39,7 @@
 
 .header {
   text-transform: uppercase;
-  color: #7C8187;
+  color: #7c8187;
   font-size: 14px;
   letter-spacing: 2px;
   margin: 27px 0 0 0;
@@ -51,7 +51,7 @@
   justify-content: center;
   text-align: center;
   height: 40px;
-  background: #E46643;
+  background: #e46643;
   color: white;
   font-size: 14px;
   text-decoration: none;
@@ -61,8 +61,9 @@
   border-radius: 4px;
   margin: 30px 0 24px;
   gap: 4px;
+
   &:hover {
-    background: #F39765;
+    background: #f39765;
   }
 }
 
@@ -90,7 +91,7 @@
 }
 
 .documentDate {
-  color: #7C8187;
+  color: #7c8187;
   font-size: 13px;
   margin: 0;
 }

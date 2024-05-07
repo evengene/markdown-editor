@@ -1,9 +1,9 @@
-import React, { ChangeEvent, FC, useMemo } from 'react';
+import React, { ChangeEvent, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setText } from '../../store/markdownSlice';
 import styles from './MarkdownInput.module.css';
 import commonStyles from '../common.module.css';
-import { RootState } from "../../store/store";
+import { RootState } from '../../store/store';
 
 export const MarkdownInput: FC = () => {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ export const MarkdownInput: FC = () => {
       <div className={commonStyles.title}>
         <h1>Markdown</h1>
       </div>
-    <textarea className={styles.textarea} onChange={onTextAreaChange} value={content}>
+      <textarea className={styles.textarea} onChange={onTextAreaChange} value={content}>
       {/*{text || savedText}*/}
     </textarea>
     </div>

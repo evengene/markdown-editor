@@ -14,4 +14,4 @@ export const sideBarSlice = createSlice({
 })
 
 export const { reducer } = sideBarSlice;
-export const { toggleSidebar} = sideBarSlice.actions
+export const { toggleSidebar } = sideBarSlice.actions

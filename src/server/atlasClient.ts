@@ -1,8 +1,8 @@
-import { MongoClient, ServerApiVersion } from "mongodb";
+import { MongoClient, ServerApiVersion } from 'mongodb';
+import { MONGO_DB_CONNECTION_STRING } from '../constants/shared';
 
-const connectionString = `mongodb+srv://elinafrontenddev:${process.env.MONGO_DB_PASSWORD}@mydb.azyhahy.mongodb.net/?retryWrites=true&w=majority&appName=MyDb` || '';
-
-const client = new MongoClient(connectionString, {
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(MONGO_DB_CONNECTION_STRING, {
   serverApi: {
     version: ServerApiVersion.v1,
     strict: true,
@@ -23,7 +23,7 @@ const getDb = async () => {
     throw error;
   }
 
-  const database = connection.db("markdown");
+  const database = connection.db('markdown');
 
   return database;
 

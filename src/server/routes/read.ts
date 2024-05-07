@@ -1,6 +1,5 @@
 import express from 'express';
 
-import '../../server/loadEnvironment';
 import getDb from '../atlasClient';
 
 const router = express.Router();

@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
 
-import { RootState } from "./store";
-import { Urls } from "../constants/urls";
+import { RootState } from './store';
+import { Urls } from '../constants/urls';
+import { EMPTY_STRING } from '../constants/shared';
 
-
-const baseApiUrl = 'http://localhost:3001';
+const baseApiUrl = `http://localhost:3001`;
 
 interface MarkdownState {
   content: string;
@@ -16,8 +16,8 @@ interface MarkdownState {
 }
 
 const initialState: MarkdownState = {
-  content: '',
-  name: '',
+  content: EMPTY_STRING,
+  name: EMPTY_STRING,
   documents: [],
   id: 0,
   status: 'idle',
@@ -32,8 +32,7 @@ export const readDocument = createAsyncThunk(
       return await fetch(`${baseApiUrl}${Urls.Read}`).then(response => {
         return response.json();
       });
-    }
-    catch (error) {
+    } catch (error) {
       console.error(error);
       throw error;
     }
@@ -42,7 +41,7 @@ export const readDocument = createAsyncThunk(
 
 export const saveDocument = createAsyncThunk(
   'markdown/saveDocument',
-  async ( { id, name, content }: { id: number | string, name: string, content: string }, { getState } ) => {
+  async ({ id, name, content }: { id: number | string, name: string, content: string }, { getState }) => {
     debugger;
     console.log('saveDocument dispatched');
     const state = getState() as RootState;
@@ -78,34 +77,36 @@ export const saveDocument = createAsyncThunk(
 
 export const updateDocument = createAsyncThunk(
   'markdown/updateDocument',
-  async ( { id, name, content }: { id: number | string, name: string, content: string }, { getState } ) => {
+  async ({ id, name, content }: { id: number | string, name: string, content: string }, { getState }) => {
     debugger;
     const state = getState() as RootState;
     if (state.markdown.documents.some(doc => doc.id === id)) {
       try {
-      const response = await fetch(`${baseApiUrl}${Urls.Update}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ id, name, content })
-      });
+        const response = await fetch(`${baseApiUrl}${Urls.Update}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ id, name, content })
+        });
 
-      if (!response.ok) {
-        throw new Error('Server error');
+        if (!response.ok) {
+          throw new Error('Server error');
+        }
+
+        const data = await response.json();
+        return { id, name, content: data };
+      } catch (error) {
+        console.error(error);
+        throw error;
       }
-
-      const data = await response.json();
-      return { id, name, content: data };
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }}}
+    }
+  }
 );
 
 export const deleteDocument = createAsyncThunk(
   'markdown/deleteDocument',
-  async ( { id, name }: { id: number | string, name: string } ) => {
+  async ({ id, name }: { id: number | string, name: string }) => {
     debugger;
     const response = await fetch(`${baseApiUrl}${Urls.Delete}`, {
 
@@ -139,7 +140,7 @@ export const createDocument = createAsyncThunk(
         id: uuidv4(),
         createdAt: new Date().toLocaleDateString(),
         name: 'New Document',
-        content: ''
+        content: EMPTY_STRING
       })
     });
 
@@ -154,18 +155,18 @@ export const markdownSlice = createSlice({
   name: 'markdown',
   initialState,
   reducers: {
-    setText: ( state, action: PayloadAction<string> ) => {
+    setText: (state, action: PayloadAction<string>) => {
       state.content = action.payload;
     },
-    setDocTitle: ( state, action: PayloadAction<string> ) => {
+    setDocTitle: (state, action: PayloadAction<string>) => {
       state.name = action.payload;
     },
-    resetDocument: ( state ) => {
-      state.content = '';
+    resetDocument: (state) => {
+      state.content = EMPTY_STRING;
       state.name = 'New Document';
       state.id = uuidv4();
     },
-    selectDocument: ( state, action: PayloadAction<string> ) => {
+    selectDocument: (state, action: PayloadAction<string>) => {
       const documentId = action.payload;
       const selectedDocument = state.documents.find(doc => doc.id === documentId);
       if (selectedDocument) {
@@ -174,18 +175,18 @@ export const markdownSlice = createSlice({
         state.id = selectedDocument.id;
       }
     },
-    setId: ( state, action: PayloadAction<number | string> ) => {
+    setId: (state, action: PayloadAction<number | string>) => {
       state.id = action.payload;
     },
     setStatus(state, action: PayloadAction<'idle' | 'pending' | 'fulfilled' | 'rejected'>) {
       state.status = action.payload;
     },
   },
-  extraReducers: ( builder ) => {
-    builder.addCase(readDocument.fulfilled, ( state, action ) => {
+  extraReducers: (builder) => {
+    builder.addCase(readDocument.fulfilled, (state, action) => {
       state.documents = action.payload;
     });
-    builder.addCase(updateDocument.fulfilled, (state, action ) => {
+    builder.addCase(updateDocument.fulfilled, (state, action) => {
       debugger;
       const { id } = action.meta.arg;
       // if the doc already exists update the array with it otherwise add new array
@@ -199,17 +200,18 @@ export const markdownSlice = createSlice({
       } else {
         state.documents.push(action.meta.arg);
       }
+      console.log('updateDocument fullfilled');
       state.status = 'idle';
     });
-    builder.addCase(updateDocument.pending, ( state, action ) => {
+    builder.addCase(updateDocument.pending, (state, action) => {
       state.status = 'pending';
       console.log('updateDocument pending');
     });
-    builder.addCase(updateDocument.rejected, ( state, action ) => {
+    builder.addCase(updateDocument.rejected, (state, action) => {
       state.status = 'rejected';
       console.log('updateDocument rejected');
     });
-    builder.addCase(saveDocument.fulfilled, ( state, action ) => {
+    builder.addCase(saveDocument.fulfilled, (state, action) => {
       const { id } = action.meta.arg;
       // if the doc already exists update the array with it otherwise add new array
       if (state.documents.some(doc => doc.id === id)) {
@@ -223,19 +225,20 @@ export const markdownSlice = createSlice({
         state.documents.push(action.meta.arg);
       }
     });
-    builder.addCase(deleteDocument.fulfilled, ( state, action ) => {
+    builder.addCase(deleteDocument.fulfilled, (state, action) => {
       debugger;
+      // TODO: after a doc is deleted the content and name should be reset and set to the first doc in the array
       const { arg } = action.meta;
       state.documents = state.documents.filter(doc => doc.id !== arg.id);
-      state.content = '';
-      state.name = '';
-      console.log("builder.addCase(deleteDocument -  deleted");
+      state.content = state.documents[0].content || EMPTY_STRING;
+      state.name = state.documents[0].name || EMPTY_STRING;
+      console.log('builder.addCase(deleteDocument -  deleted');
     });
-    builder.addCase(createDocument.fulfilled, ( state, action ) => {
+    builder.addCase(createDocument.fulfilled, (state, action) => {
       debugger;
       state.documents.push(action.payload);
       console.log(action.payload);
-      console.log("Document created!");
+      console.log('Document created!');
 
       state.content = action.payload.content;
       state.name = action.payload.name;

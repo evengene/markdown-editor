@@ -1,8 +1,8 @@
 import { useSelector, useDispatch as useDispatchRedux } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import type { TypedUseSelectorHook } from 'react-redux';
-import { sideBarSlice } from "./sideBarSlice";
-import { markdownSlice } from "./markdownSlice";
+import { sideBarSlice } from './sideBarSlice';
+import { markdownSlice } from './markdownSlice';
 
 export const store = configureStore({
   reducer: {
