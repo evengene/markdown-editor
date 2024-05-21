@@ -13,6 +13,12 @@ code {
     monospace;
 }
 
+#root {
+  height: 100vh;
+  position: relative;
+}
+
+
 :root {
   --orange: #E46643;
   --orange-light: #F39765;

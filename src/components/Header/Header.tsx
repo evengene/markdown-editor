@@ -1,4 +1,6 @@
 import React, { ChangeEvent, useEffect } from 'react';
+import Image from "next/image";
+
 import styles from './Header.module.css';
 import { toggleSidebar } from '../../store/sideBarSlice';
 import { useAppSelector, useDispatch } from '../../store/store';
@@ -9,7 +11,6 @@ import docIcon from '../../assets/icon-document.svg';
 import deleteIcon from '../../assets/icon-delete.svg';
 import saveIcon from '../../assets/icon-save.svg';
 import {
-  deleteDocument,
   updateDocument,
   setDocTitle,
   createDocument,
@@ -58,29 +59,29 @@ export const Header = () => {
     dispatch(toggleModal());
   }
 
-  useEffect(() => {
-    dispatch(readDocument());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(readDocument());
+  // }, [dispatch]);
 
   const renderButtonContent = () => {
     switch (status) {
       case 'pending':
-        return <><img
+        return <><Image
           src={saveIcon}
           alt="saving"
         />Saving...</>;
       case 'fulfilled':
-        return <><img
+        return <><Image
           src={saveIcon}
           alt="save"
         />Saved!</>;
       case 'rejected':
-        return <><img
+        return <><Image
           src={saveIcon}
           alt="error"
         />Error saving</>;
       default:
-        return <><img
+        return <><Image
           src={saveIcon}
           alt="save"
         />Save Changes</>;
@@ -95,19 +96,19 @@ export const Header = () => {
             onClick={() => dispatch(toggleSidebar())}
             className={styles.burger}
           >
-            <img
+            <Image
               src={sidebarOpen ? closeIcon : burgerIcon}
               alt="menu"
             />
           </button>
         </div>
-        <img
+        <Image
           src={logo}
           alt="Markdown Editor"
         />
         <span className={styles.divider} />
         <div className={styles.listItem}>
-          <img
+          <Image
             className={styles.icon}
             src={docIcon}
             alt="document icon"
@@ -129,7 +130,7 @@ export const Header = () => {
             className={styles.deleteBtn}
             onClick={() => onDeleteHandler()}
           >
-            <img
+            <Image
               src={deleteIcon}
               alt="delete"
             />

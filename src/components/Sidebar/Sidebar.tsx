@@ -4,6 +4,7 @@ import styles from './Sidebar.module.css';
 import docIcon from '../../assets/icon-document.svg';
 import { readDocument, selectDocument, createDocument, toggleTheme } from '../../store/markdownSlice';
 import { EMPTY_STRING } from '../../constants/shared';
+import Image from "next/image";
 
 const SvgIconDark = ( { theme }: { theme: string } ) => (
   <svg
@@ -79,7 +80,7 @@ export const Sidebar = () => {
                   className={styles.listItem}
                   onClick={handleDocClick(doc.id)}
                 >
-                  <img
+                  <Image
                     className={styles.icon}
                     src={docIcon}
                     alt="document icon"
