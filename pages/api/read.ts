@@ -1,11 +1,25 @@
 // pages/api/read.ts
 import { NextApiRequest, NextApiResponse } from 'next'
 import getDb from '../../src/server/atlasClient';
+import { Db } from "mongodb";
+
+let cachedDb: Db | null = null;
+
+async function connectToDatabase() {
+  if (cachedDb) {
+    return cachedDb;
+  }
+
+  cachedDb = await getDb();
+  return cachedDb;
+}
 
 export default async function read(req: NextApiRequest, res: NextApiResponse ) {
+
+  const db = await connectToDatabase();
+
   try {
-    let database = await getDb();
-    const data = await database
+    const data = await db
       .collection('sample')
       .find()
       .toArray();

@@ -6,6 +6,7 @@ import { Urls } from '../constants/urls';
 import { EMPTY_STRING } from '../constants/shared';
 
 const baseApiUrl = `https://markdown-editor-olive.vercel.app`;
+// const baseApiUrl = `http://localhost:3001`;
 
 interface MarkdownState {
   content: string;
@@ -32,7 +33,8 @@ export const readDocument = createAsyncThunk(
   'markdown/readDocument',
   async () => {
     try {
-      const response = await fetch(`${baseApiUrl}/api/${Urls.Read}`);
+      debugger;
+      const response = await fetch(`${baseApiUrl}/api${Urls.Read}`);
       if (!response.ok) {
         new Error('Server error');
       }
