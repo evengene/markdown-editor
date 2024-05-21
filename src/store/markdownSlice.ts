@@ -5,7 +5,7 @@ import { RootState } from './store';
 import { Urls } from '../constants/urls';
 import { EMPTY_STRING } from '../constants/shared';
 
-const baseApiUrl = `http://localhost:3001`;
+const baseApiUrl = `https://markdown-editor-olive.vercel.app`;
 
 interface MarkdownState {
   content: string;
