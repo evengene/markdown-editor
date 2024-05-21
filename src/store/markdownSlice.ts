@@ -32,9 +32,11 @@ export const readDocument = createAsyncThunk(
   'markdown/readDocument',
   async () => {
     try {
-      return await fetch(`${baseApiUrl}${Urls.Read}`).then(response => {
-        return response.json();
-      });
+      const response = await fetch(`${baseApiUrl}/api/${Urls.Read}`);
+      if (!response.ok) {
+        new Error('Server error');
+      }
+      return await response.json();
     } catch (error) {
       console.error(error);
       throw error;
