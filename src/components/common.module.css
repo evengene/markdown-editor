@@ -1,15 +1,27 @@
 .container {
   flex: 1;
   height: calc(100% - 46px);
+  border-right: 1px solid var(--sixty);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .title {
   width: 100%;
-  background: #1D1F22;
-  color: #C1C4CB;
+  color: var(--forty);
   display: flex;
   height: 42px;
   align-items: center;
+}
+
+.titleLight {
+  background: var(--twenty);
+}
+
+.titleDark {
+  background: var(--ninety);
 }
 
 

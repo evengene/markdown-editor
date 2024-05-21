@@ -13,6 +13,8 @@ interface MarkdownState {
   documents: any[],
   id: number | string;
   status: 'idle' | 'pending' | 'fulfilled' | 'rejected';
+  confirmDeleteOpen: boolean;
+  theme: 'dark' | 'light'
 }
 
 const initialState: MarkdownState = {
@@ -21,13 +23,14 @@ const initialState: MarkdownState = {
   documents: [],
   id: 0,
   status: 'idle',
+  confirmDeleteOpen: false,
+  theme: 'dark',
 };
 
 
 export const readDocument = createAsyncThunk(
   'markdown/readDocument',
   async () => {
-    debugger;
     try {
       return await fetch(`${baseApiUrl}${Urls.Read}`).then(response => {
         return response.json();
@@ -42,7 +45,6 @@ export const readDocument = createAsyncThunk(
 export const saveDocument = createAsyncThunk(
   'markdown/saveDocument',
   async ({ id, name, content }: { id: number | string, name: string, content: string }, { getState }) => {
-    debugger;
     console.log('saveDocument dispatched');
     const state = getState() as RootState;
     if (state.markdown.documents.some(doc => doc.id !== id)) {
@@ -78,7 +80,6 @@ export const saveDocument = createAsyncThunk(
 export const updateDocument = createAsyncThunk(
   'markdown/updateDocument',
   async ({ id, name, content }: { id: number | string, name: string, content: string }, { getState }) => {
-    debugger;
     const state = getState() as RootState;
     if (state.markdown.documents.some(doc => doc.id === id)) {
       try {
@@ -107,7 +108,6 @@ export const updateDocument = createAsyncThunk(
 export const deleteDocument = createAsyncThunk(
   'markdown/deleteDocument',
   async ({ id, name }: { id: number | string, name: string }) => {
-    debugger;
     const response = await fetch(`${baseApiUrl}${Urls.Delete}`, {
 
       method: 'DELETE',
@@ -130,7 +130,6 @@ export const deleteDocument = createAsyncThunk(
 export const createDocument = createAsyncThunk(
   'markdown/createDocument',
   async () => {
-    debugger;
     const response = await fetch(`${baseApiUrl}${Urls.Create}`, {
       method: 'POST',
       headers: {
@@ -181,13 +180,18 @@ export const markdownSlice = createSlice({
     setStatus(state, action: PayloadAction<'idle' | 'pending' | 'fulfilled' | 'rejected'>) {
       state.status = action.payload;
     },
+    toggleModal: (state) => {
+      state.confirmDeleteOpen = !state.confirmDeleteOpen;
+    },
+    toggleTheme: (state) => {
+      state.theme = state.theme === 'dark' ? 'light' : 'dark';
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(readDocument.fulfilled, (state, action) => {
       state.documents = action.payload;
     });
     builder.addCase(updateDocument.fulfilled, (state, action) => {
-      debugger;
       const { id } = action.meta.arg;
       // if the doc already exists update the array with it otherwise add new array
       if (state.documents.some(doc => doc.id === id)) {
@@ -226,7 +230,6 @@ export const markdownSlice = createSlice({
       }
     });
     builder.addCase(deleteDocument.fulfilled, (state, action) => {
-      debugger;
       // TODO: after a doc is deleted the content and name should be reset and set to the first doc in the array
       const { arg } = action.meta;
       state.documents = state.documents.filter(doc => doc.id !== arg.id);
@@ -235,7 +238,6 @@ export const markdownSlice = createSlice({
       console.log('builder.addCase(deleteDocument -  deleted');
     });
     builder.addCase(createDocument.fulfilled, (state, action) => {
-      debugger;
       state.documents.push(action.payload);
       console.log(action.payload);
       console.log('Document created!');
@@ -247,6 +249,14 @@ export const markdownSlice = createSlice({
   }
 });
 
-export const { setText, setDocTitle, selectDocument, resetDocument, setId } = markdownSlice.actions;
+export const {
+  setText,
+  setDocTitle,
+  selectDocument,
+  resetDocument,
+  setId,
+  toggleModal,
+  toggleTheme
+} = markdownSlice.actions;
 
 export default markdownSlice.reducer;

@@ -3,9 +3,9 @@
 }
 
 blockquote {
-  border-left: 4px solid #e46643;
+  border-left: 4px solid var(--orange);
   padding: 24px 32px 24px 20px;
-  background: #2b2d31;
+  background: var(--eighty);
   color: #fff;
   margin-left: 0;
   border-radius: 4px;
@@ -16,7 +16,7 @@ a {
 }
 
 pre, p code {
-  background: #2b2d31;
+  background: var(--eighty);
   padding: 24px;
   border-radius: 4px;
   overflow-x: auto;
@@ -37,7 +37,7 @@ hr {
 p {
   font-size: 14px;
   line-height: 24px;
-  color: #c1c4cb;
+  color: var(--forty);
   margin: 21px;
 }
 

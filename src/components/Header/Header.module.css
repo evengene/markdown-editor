@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-items: center;
   height: 72px;
-  background: #2B2D31;
+  background: var(--eighty);
   color: white;
 }
 
@@ -20,7 +20,7 @@
   justify-content: center;
   width: 72px;
   height: 72px;
-  background: #35393F;
+  background: var(--seventy);
   z-index: 10;
 }
 .burger {
@@ -48,13 +48,13 @@ background: none;
 .documentInfo {
   display: flex;
   flex-direction: column;
-  gap: 4px;
 }
 
 .documentDate {
-  color: #7C8187;
+  color: var(--fifty);
   font-size: 13px;
   margin: 0;
+  font-family: 'Roboto Light', sans-serif;
 }
 
 .titleInput {
@@ -62,13 +62,13 @@ background: none;
   font-size: 15px;
   font-weight: 400;
   margin: 0;
-  background: #2b2d31;
+  background: var(--eighty);
   border: none;
 }
 
 .titleInput:focus {
   outline: none;
-  border-bottom: 1px solid #E46643;
+  border-bottom: 1px solid var(--orange);
 }
 
 .divider {
@@ -94,7 +94,7 @@ background: none;
   text-align: center;
   height: 40px;
   width: 152px;
-  background: #E46643;
+  background: var(--orange);
   color: white;
   font-size: 14px;
   text-decoration: none;
@@ -105,7 +105,7 @@ background: none;
   margin-right: 16px;
   gap: 4px;
   &:hover {
-    background: #F39765;
+    background: var(--orange-light);
   }
 }
 

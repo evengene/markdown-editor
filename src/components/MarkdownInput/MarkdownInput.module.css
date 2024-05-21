@@ -9,7 +9,7 @@
   font-family: 'Roboto Mono', sans-serif;
   border-radius: 0;
   border: none;
-  background: #151619;
-  color: #C1C4CB;
+  background: var(--hundred);
+  color: var(--forty);
   padding: 16px;
 }

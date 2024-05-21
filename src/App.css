@@ -1,14 +1,4 @@
 #root {
   height: 100vh;
   position: relative;
-  /*overflow-x: hidden;*/
-}
-
-.divider {
-  height: 100%;
-  width: 1px;
-  background: #979797;
-  z-index: 1;
-  margin: 0;
-  border: none;
 }

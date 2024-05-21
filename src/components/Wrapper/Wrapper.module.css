@@ -3,16 +3,14 @@
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
-  /*height: calc(100vh - 72px);*/
   height: auto;
-  background-color: #151619;
+  background-color: var(--hundred);
   color: white;
   flex: 0 0 100%;
   flex-grow: 1;
 }
 
 .wrapper.sidebarOpen {
-  /*transform: translateX(250px);*/
   width: auto;
   margin-left: 250px;
 }

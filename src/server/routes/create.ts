@@ -5,7 +5,7 @@ import getDb from '../atlasClient';
 
 const router = express.Router();
 
-router.post('/', async (req, res, next) => {
+router.post('/', async ( req, res, next ) => {
 
   const { name, content } = req.body;
 
@@ -23,9 +23,7 @@ router.post('/', async (req, res, next) => {
 
     await database.collection('sample').insertOne(newDocument);
     console.log(newDocument);
-    console.log('New document created successfully: ' + newDocument.id);
     res.json(newDocument);
-
   } catch (err) {
     next(err);
     console.error(err);
