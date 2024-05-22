@@ -1,17 +1,12 @@
-import express from 'express';
+import { NextApiRequest, NextApiResponse } from "next";
+import getDb from "../../src/server/atlasClient";
 import { v4 as uuidv4 } from 'uuid';
 
-import getDb from '../atlasClient';
-
-const router = express.Router();
-
-router.post('/', async ( req, res, next ) => {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const { name, content } = req.body;
 
   try {
-    console.log(`Received ${req.method} request for ${req.url}, body: ${JSON.stringify(req.body)}`);
-
     let database = await getDb();
 
     const newDocument = {
@@ -25,9 +20,10 @@ router.post('/', async ( req, res, next ) => {
     console.log(newDocument);
     res.json(newDocument);
   } catch (err) {
-    next(err);
-    console.error(err);
+    res.status(400).json({
+      success: false,
+      message: err,
+    });
   }
-});
+}
 
-export default router;

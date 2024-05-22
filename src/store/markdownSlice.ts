@@ -5,8 +5,8 @@ import { RootState } from './store';
 import { Urls } from '../constants/urls';
 import { EMPTY_STRING } from '../constants/shared';
 
-const baseApiUrl = `https://markdown-editor-olive.vercel.app`;
-// const baseApiUrl = `http://localhost:3001`;
+// const baseApiUrl = `https://markdown-editor-olive.vercel.app`;
+const baseApiUrl = `http://localhost:3000`;
 
 interface MarkdownState {
   content: string;
@@ -49,12 +49,13 @@ export const readDocument = createAsyncThunk(
 export const saveDocument = createAsyncThunk(
   'markdown/saveDocument',
   async ({ id, name, content }: { id: number | string, name: string, content: string }, { getState }) => {
+    debugger;
     console.log('saveDocument dispatched');
     const state = getState() as RootState;
     if (state.markdown.documents.some(doc => doc.id !== id)) {
       console.log('fetch call being executed');
 
-      const response = await fetch(`${baseApiUrl}${Urls.Save}`, {
+      const response = await fetch(`${baseApiUrl}/api${Urls.Save}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -87,7 +88,7 @@ export const updateDocument = createAsyncThunk(
     const state = getState() as RootState;
     if (state.markdown.documents.some(doc => doc.id === id)) {
       try {
-        const response = await fetch(`${baseApiUrl}${Urls.Update}`, {
+        const response = await fetch(`${baseApiUrl}/api${Urls.Update}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -134,7 +135,7 @@ export const deleteDocument = createAsyncThunk(
 export const createDocument = createAsyncThunk(
   'markdown/createDocument',
   async () => {
-    const response = await fetch(`${baseApiUrl}${Urls.Create}`, {
+    const response = await fetch(`${baseApiUrl}/api${Urls.Create}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
