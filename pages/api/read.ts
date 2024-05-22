@@ -12,8 +12,15 @@ async function connectToDatabase() {
   }
 
   console.log('Establishing new database connection');
-  cachedDb = await getDb();
-  console.log('Database connection established');
+
+  try {
+    cachedDb = await getDb();
+    console.log('Database connection established');
+
+  } catch (error) {
+    console.error('Error occurred while connecting to database', error);
+    throw error;
+  }
   return cachedDb;
 }
 
