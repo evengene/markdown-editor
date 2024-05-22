@@ -2,7 +2,13 @@ import React, { useEffect } from 'react';
 import { useAppSelector, useDispatch } from '../../store/store';
 import styles from './Sidebar.module.css';
 import docIcon from '../../assets/icon-document.svg';
-import { readDocument, selectDocument, createDocument, toggleTheme } from '../../store/markdownSlice';
+import {
+  readDocument,
+  selectDocument,
+  createDocument,
+  toggleTheme,
+  toggleNotificationModal
+} from '../../store/markdownSlice';
 import { EMPTY_STRING } from '../../constants/shared';
 import Image from "next/image";
 
@@ -52,6 +58,10 @@ export const Sidebar = () => {
   }
 
   const onCreateHandler = () => {
+    if(documents.length >= 5) {
+      dispatch(toggleNotificationModal());
+      return;
+    }
     dispatch(createDocument());
   }
 

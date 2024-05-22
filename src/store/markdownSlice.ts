@@ -16,6 +16,7 @@ interface MarkdownState {
   status: 'idle' | 'pending' | 'fulfilled' | 'rejected';
   confirmDeleteOpen: boolean;
   theme: 'dark' | 'light'
+  notificationModalOpen: boolean;
 }
 
 const initialState: MarkdownState = {
@@ -26,6 +27,7 @@ const initialState: MarkdownState = {
   status: 'idle',
   confirmDeleteOpen: false,
   theme: 'dark',
+  notificationModalOpen: false,
 };
 
 
@@ -113,7 +115,7 @@ export const updateDocument = createAsyncThunk(
 export const deleteDocument = createAsyncThunk(
   'markdown/deleteDocument',
   async ({ id, name }: { id: number | string, name: string }) => {
-    const response = await fetch(`${baseApiUrl}${Urls.Delete}`, {
+    const response = await fetch(`${baseApiUrl}/api${Urls.Delete}`, {
 
       method: 'DELETE',
       headers: {
@@ -190,7 +192,10 @@ export const markdownSlice = createSlice({
     },
     toggleTheme: (state) => {
       state.theme = state.theme === 'dark' ? 'light' : 'dark';
-    }
+    },
+    toggleNotificationModal: (state) => {
+      state.notificationModalOpen = !state.notificationModalOpen;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(readDocument.fulfilled, (state, action) => {
@@ -261,7 +266,8 @@ export const {
   resetDocument,
   setId,
   toggleModal,
-  toggleTheme
+  toggleTheme,
+  toggleNotificationModal,
 } = markdownSlice.actions;
 
 export default markdownSlice.reducer;

@@ -8,6 +8,7 @@ import { store } from '../src/store/store';
 import { Sidebar } from '../src/components/Sidebar/Sidebar';
 import { Wrapper } from '../src/components/Wrapper/Wrapper';
 import { DeleteConfirmationModal } from "../src/components/DeleteConfirmationModal/DeleteConfirmationModal";
+import { NotificationModal } from "../src/components/NotificationModal/NotificationModal";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <MarkdownPreview/>
       </Wrapper>
       <DeleteConfirmationModal />
+      <NotificationModal />
     </ReduxProvider>
   );
 }
