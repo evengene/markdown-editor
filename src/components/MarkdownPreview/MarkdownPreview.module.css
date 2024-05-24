@@ -1,5 +1,6 @@
 .textPreview {
-  margin: 24px;
+  max-width: 672px;
+  margin: 24px auto 63px;
 }
 
 .textPreview blockquote {

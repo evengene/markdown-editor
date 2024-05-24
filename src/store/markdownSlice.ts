@@ -17,6 +17,7 @@ interface MarkdownState {
   confirmDeleteOpen: boolean;
   theme: 'dark' | 'light'
   notificationModalOpen: boolean;
+  showPagePreview: boolean;
 }
 
 const initialState: MarkdownState = {
@@ -28,6 +29,7 @@ const initialState: MarkdownState = {
   confirmDeleteOpen: false,
   theme: 'dark',
   notificationModalOpen: false,
+  showPagePreview: false,
 };
 
 
@@ -196,6 +198,9 @@ export const markdownSlice = createSlice({
     toggleNotificationModal: (state) => {
       state.notificationModalOpen = !state.notificationModalOpen;
     },
+    togglePagePreview: (state) => {
+      state.showPagePreview = !state.showPagePreview;
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(readDocument.fulfilled, (state, action) => {
@@ -268,6 +273,7 @@ export const {
   toggleModal,
   toggleTheme,
   toggleNotificationModal,
+  togglePagePreview,
 } = markdownSlice.actions;
 
 export default markdownSlice.reducer;

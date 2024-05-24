@@ -1,6 +1,6 @@
 .container {
   flex: 1;
-  height: calc(100% - 46px);
+  height: calc(100vh - 46px);
   border-right: 1px solid var(--sixty);
   display: flex;
   flex-direction: column;
@@ -11,6 +11,7 @@
 .title {
   width: 100%;
   color: var(--forty);
+  background: var(--ninety);
   display: flex;
   height: 42px;
   align-items: center;

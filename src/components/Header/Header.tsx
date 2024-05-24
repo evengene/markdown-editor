@@ -16,11 +16,12 @@ import {
   createDocument,
   resetDocument,
   saveDocument,
-  readDocument,
-  setId, toggleModal
+  setId,
+  toggleModal
 } from '../../store/markdownSlice';
 import { v4 as uuidv4 } from 'uuid';
 import { EMPTY_STRING } from '../../constants/shared';
+import { useIsTablet } from "../../hooks/useIsTablet";
 
 
 export const Header = () => {
@@ -29,7 +30,7 @@ export const Header = () => {
   const { sidebarOpen } = useAppSelector(( state ) => state.sidebar);
   const { status } = useAppSelector(( state ) => state.markdown);
   const { id, name, content, } = useAppSelector(( state ) => state.markdown);
-
+  const {isTablet } = useIsTablet();
   const handleSave = () => {
     if (id === 0) {
       const newId = uuidv4();
@@ -102,11 +103,17 @@ export const Header = () => {
             />
           </button>
         </div>
-        <Image
-          src={logo}
-          alt="Markdown Editor"
-        />
-        <span className={styles.divider} />
+
+        { !isTablet && (
+          <>
+            <Image
+              src={logo}
+              alt="Markdown Editor"
+            />
+            <span className={styles.divider} />
+          </>
+        )}
+
         <div className={styles.listItem}>
           <Image
             className={styles.icon}
