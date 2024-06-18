@@ -1,7 +1,9 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import getDb from "../src/server/atlasClient";
+import { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function handler( req: NextApiRequest, res: NextApiResponse ) {
+import getDb from '../src/server/atlasClient';
+import allowCors from '../src/middleware/allowCors';
+
+const deleteHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { id, name } = req.body;
     const database = await getDb();
@@ -9,7 +11,7 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
     const deleteResult = collection.deleteOne({ name, id });
     console.log(deleteResult);
 
-    if (await deleteResult.then(( result ) => result.deletedCount === 0)) {
+    if (await deleteResult.then((result) => result.deletedCount === 0)) {
       res.status(404).send('File not found');
       return;
     }
@@ -22,5 +24,5 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
   }
 }
 
-
+export default allowCors(deleteHandler);
 

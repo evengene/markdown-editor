@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import getDb from '../src/server/atlasClient';
 import allowCors from '../src/middleware/allowCors';
 
-const read = async (req: NextApiRequest, res: NextApiResponse) => {
+const readHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     let database = await getDb();
@@ -10,8 +10,6 @@ const read = async (req: NextApiRequest, res: NextApiResponse) => {
       .collection('sample')
       .find()
       .toArray();
-
-
     res.json(data);
     console.log('Database query executed', data);
     res.status(200).json(data);
@@ -21,4 +19,4 @@ const read = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default allowCors(read);
+export default allowCors(readHandler);

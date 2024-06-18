@@ -1,8 +1,10 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import getDb from "../src/server/atlasClient";
+import { NextApiRequest, NextApiResponse } from 'next';
 import { v4 as uuidv4 } from 'uuid';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+import getDb from '../src/server/atlasClient';
+import allowCors from '../src/middleware/allowCors';
+
+const createHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const { name, content } = req.body;
 
@@ -27,3 +29,4 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 }
 
+export default allowCors(createHandler);
