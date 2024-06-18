@@ -15,12 +15,3 @@
   width: auto;
   margin-left: 250px;
 }
-
-.previewIcon {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  padding: 10px;
-  cursor: pointer;
-  
-}
