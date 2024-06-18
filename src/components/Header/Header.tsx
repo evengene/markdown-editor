@@ -20,7 +20,7 @@ import {
   toggleModal
 } from '../../store/markdownSlice';
 import { v4 as uuidv4 } from 'uuid';
-import { EMPTY_STRING } from '../../constants/shared';
+import { DEFAULT_DOCUMENT_NAME, EMPTY_STRING } from '../../constants/shared';
 import { useIsTablet } from "../../hooks/useIsTablet";
 
 
@@ -34,7 +34,7 @@ export const Header = () => {
   const handleSave = () => {
     if (id === 0) {
       const newId = uuidv4();
-      dispatch(saveDocument({ id: newId, name, content: content || '' }));
+      dispatch(saveDocument({ id: newId, name: name || DEFAULT_DOCUMENT_NAME, content: content || '' }));
       dispatch(setId(newId));
       return;
     }

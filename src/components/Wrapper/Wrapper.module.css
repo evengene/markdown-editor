@@ -15,3 +15,32 @@
   width: auto;
   margin-left: 250px;
 }
+
+.icon {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  padding: 10px;
+  background-size: inherit;
+  outline: none;
+  border: none;
+  transition: background 0.5s;
+}
+
+.openEyeIcon {
+  background: url('../../assets/icon-show-preview.svg') center no-repeat;
+}
+
+.openEyeIcon:hover {
+  background: url('../../assets/icon-show-preview-hover.svg') center no-repeat;
+  background-size: inherit;
+}
+
+.closedEyeIcon {
+  background: url('../../assets/icon-hide-preview.svg') center no-repeat;
+}
+
+.closedEyeIcon:hover {
+  background: url('../../assets/icon-hide-preview-hover.svg') center no-repeat;
+  background-size: inherit;
+}

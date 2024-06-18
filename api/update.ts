@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { v4 as uuidv4 } from 'uuid';
 
-import getDb from "../../src/server/atlasClient";
+import getDb from "../src/server/atlasClient";
 
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

@@ -15,9 +15,8 @@ export const MarkdownPreview: FC<MarkdownPreviewProps> = ( props ) => {
 
   const dispatch = useDispatch();
 
-  const { theme } = useSelector(( state: RootState ) => state.markdown);
-  const markdown = useSelector(( state: RootState ) => state.markdown.content);
-  const html = (marked as any)(markdown);
+  const { theme, content = "" } = useSelector(( state: RootState ) => state.markdown);
+  const html = (marked as any)(content);
 
   const onPreviewClick = () => {
     dispatch(togglePagePreview());

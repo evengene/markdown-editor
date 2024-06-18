@@ -5,8 +5,8 @@ import { RootState } from './store';
 import { Urls } from '../constants/urls';
 import { EMPTY_STRING } from '../constants/shared';
 
-// const baseApiUrl = `https://markdown-editor-olive.vercel.app`;
-const baseApiUrl = `http://localhost:3000`;
+const baseApiUrl = `https://markdown-editor-olive.vercel.app`;
+// const baseApiUrl = `http://localhost:3002`;
 
 interface MarkdownState {
   content: string;
@@ -32,12 +32,10 @@ const initialState: MarkdownState = {
   showPagePreview: false,
 };
 
-
 export const readDocument = createAsyncThunk(
   'markdown/readDocument',
   async () => {
     try {
-      debugger;
       const response = await fetch(`${baseApiUrl}/api${Urls.Read}`);
       if (!response.ok) {
         new Error('Server error');
@@ -53,7 +51,6 @@ export const readDocument = createAsyncThunk(
 export const saveDocument = createAsyncThunk(
   'markdown/saveDocument',
   async ({ id, name, content }: { id: number | string, name: string, content: string }, { getState }) => {
-    debugger;
     console.log('saveDocument dispatched');
     const state = getState() as RootState;
     if (state.markdown.documents.some(doc => doc.id !== id)) {
@@ -175,11 +172,12 @@ export const markdownSlice = createSlice({
       state.id = uuidv4();
     },
     selectDocument: (state, action: PayloadAction<string>) => {
+      debugger;
       const documentId = action.payload;
       const selectedDocument = state.documents.find(doc => doc.id === documentId);
       if (selectedDocument) {
-        state.content = selectedDocument.content;
-        state.name = selectedDocument.name;
+        state.content = selectedDocument.content ?? EMPTY_STRING;
+        state.name = selectedDocument.name ?? EMPTY_STRING;
         state.id = selectedDocument.id;
       }
     },

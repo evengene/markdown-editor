@@ -10,9 +10,9 @@ import {
   toggleNotificationModal
 } from '../../store/markdownSlice';
 import { EMPTY_STRING } from '../../constants/shared';
-import Image from "next/image";
+import Image from 'next/image';
 
-const SvgIconDark = ( { theme }: { theme: string } ) => (
+const SvgIconDark = ({ theme }: { theme: string }) => (
   <svg
     width="18"
     height="18"
@@ -25,7 +25,7 @@ const SvgIconDark = ( { theme }: { theme: string } ) => (
   </svg>
 )
 
-const SvgIconLight = ( { theme }: { theme: string } ) => (
+const SvgIconLight = ({ theme }: { theme: string }) => (
   <svg
     width="18"
     height="18"
@@ -40,8 +40,8 @@ const SvgIconLight = ( { theme }: { theme: string } ) => (
 export const Sidebar = () => {
 
   const dispatch = useDispatch();
-  const { sidebarOpen } = useAppSelector(( state ) => state.sidebar);
-  const { documents, theme } = useAppSelector(( state ) => state.markdown);
+  const { sidebarOpen } = useAppSelector((state) => state.sidebar);
+  const { documents, theme } = useAppSelector((state) => state.markdown);
 
 
   useEffect(() => {
@@ -51,14 +51,15 @@ export const Sidebar = () => {
     }
   }, [dispatch, sidebarOpen]);
 
-  const handleDocClick = ( id: string ) => () => {
-    console.log('clicked');
+  const handleDocClick = (id: string) => () => {
+    debugger;
+    console.log('clicked 111111');
     console.log(id);
     dispatch(selectDocument(id));
   }
 
   const onCreateHandler = () => {
-    if(documents.length >= 5) {
+    if (documents.length >= 5) {
       dispatch(toggleNotificationModal());
       return;
     }
@@ -84,7 +85,7 @@ export const Sidebar = () => {
           </button>
           {documents.length > 0 && (
             <ul className={styles.documentList}>
-              {documents.map(( doc ) => (
+              {documents.map((doc) => (
                 <li
                   key={doc.id}
                   className={styles.listItem}
@@ -105,7 +106,7 @@ export const Sidebar = () => {
           )}
         </div>
         <div className={styles.toggleWrapper}>
-          <SvgIconDark theme={theme} />
+          <SvgIconDark theme={theme}/>
           <label className={styles.themeToggle}>
             <input
               type="checkbox"
@@ -114,7 +115,7 @@ export const Sidebar = () => {
             />
             <span className={styles.themeToggleSlider}></span>
           </label>
-          <SvgIconLight theme={theme} />
+          <SvgIconLight theme={theme}/>
         </div>
       </div>
     </aside>

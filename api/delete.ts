@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import getDb from "../../src/server/atlasClient";
+import getDb from "../src/server/atlasClient";
 
 export default async function handler( req: NextApiRequest, res: NextApiResponse ) {
   try {
