@@ -1,6 +1,11 @@
 .textPreview {
   max-width: 672px;
-  padding: 0 24px 24px;
+  padding: 0 24px 63px;
+}
+
+.textPreviewLight {
+  background: #fff;
+  color: var(--eighty);
 }
 
 .textPreview blockquote {
@@ -12,11 +17,16 @@
   border-radius: 4px;
 }
 
+.textPreview blockquote p {
+  margin: 0;
+  font-weight: bold;
+}
+
 .textPreview a {
   color: white;
 }
 
-.textPreview pre, .textPreview p code {
+.textPreview pre, .textPreview code {
   background: var(--eighty);
   padding: 24px;
   border-radius: 4px;
@@ -24,8 +34,10 @@
   color: white;
 }
 
-.textPreview p code {
+.textPreview code {
   padding: 2px 4px;
+  font-size: 14px;
+  line-height: 24px;
 }
 
 .textPreview hr {
@@ -53,4 +65,61 @@
   font-family: 'Roboto Slab', sans-serif;
   font-weight: bold;
   margin: 21px 0;
+}
+
+.textPreview h4 {
+  font-size: 20px;
+  line-height: normal;
+  margin: auto;
+}
+
+.textPreview h5 {
+  font-size: 16px;
+  margin: auto;
+}
+
+.textPreview h6 {
+  font-size: 14px;
+  color: var(--orange);
+  margin: auto;
+}
+
+
+.textPreview ol {
+  line-height: 24px;
+  font-size: 14px;
+}
+
+.textPreview li {
+  padding: 4px 0;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.textPreview li::marker {
+  color: var(--orange);
+}
+
+.textPreviewLight p,
+.textPreviewLight ol {
+  color: var(--fifty);
+}
+
+.textPreviewLight blockquote {
+  background: var(--twenty);
+
+}
+
+.textPreviewLight blockquote p {
+  color: var(--seventy);
+}
+
+.textPreviewLight a {
+  color: var(--seventy);
+}
+
+.textPreviewLight pre,
+.textPreviewLight code {
+  background: var(--twenty);
+  color: var(--seventy);
 }

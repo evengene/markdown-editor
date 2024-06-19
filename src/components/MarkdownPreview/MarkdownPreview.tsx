@@ -23,14 +23,14 @@ export const MarkdownPreview: FC<MarkdownPreviewProps> = ( props ) => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${theme === 'light' ? styles.containerLight : styles.container}`}>
       <div className={`${styles.title} ${theme === 'light' ? styles.titleLight : styles.title}`}>
         <h1>Preview</h1>
-        <Image src={previewIcon} alt="preview" className={styles.icon} onClick={onPreviewClick} />
+        <Image src={previewIcon} alt="preview" className={styles.icon} onClick={onPreviewClick}/>
       </div>
       <div
-        className={commonStyles.textPreview}
-        dangerouslySetInnerHTML={{ __html: html }} />
+        className={`${commonStyles.textPreview} ${theme === 'light' ? commonStyles.textPreviewLight : commonStyles.textPreview}`}
+        dangerouslySetInnerHTML={{ __html: html }}/>
     </div>
   );
 }

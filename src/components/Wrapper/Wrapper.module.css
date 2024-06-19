@@ -16,6 +16,10 @@
   margin-left: 250px;
 }
 
+.wrapperLight {
+  background-color: #fff;
+}
+
 .icon {
   position: absolute;
   top: 10px;

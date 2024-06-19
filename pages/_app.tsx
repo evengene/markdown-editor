@@ -1,8 +1,6 @@
 import React from 'react';
 import '../src/global.css';
 import { Header } from '../src/components/Header/Header';
-import { MarkdownInput } from '../src/components/MarkdownInput/MarkdownInput';
-import { MarkdownPreview } from '../src/components/MarkdownPreview/MarkdownPreview';
 import { Provider as ReduxProvider } from 'react-redux';
 import { store } from '../src/store/store';
 import { Sidebar } from '../src/components/Sidebar/Sidebar';
@@ -17,10 +15,7 @@ function App() {
     <ReduxProvider store={store}>
       <Header/>
       <Sidebar/>
-      <Wrapper>
-        <MarkdownInput/>
-        <MarkdownPreview/>
-      </Wrapper>
+      <Wrapper />
       <DeleteConfirmationModal />
       <NotificationModal />
     </ReduxProvider>

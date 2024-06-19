@@ -1,7 +1,6 @@
 .container {
   flex: 1;
   height: calc(100vh - 72px);
-  border-right: 1px solid var(--sixty);
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -20,6 +19,7 @@
 
 .titleLight {
   background: var(--twenty);
+  color: var(--fifty);
 }
 
 .titleDark {

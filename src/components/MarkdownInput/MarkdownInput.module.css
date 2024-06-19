@@ -13,3 +13,16 @@
   color: var(--forty);
   padding: 16px;
 }
+
+.textareaLight {
+  background: #fff;
+  color: var(--eighty);
+}
+
+.inputContainer {
+  border-right: 1px solid var(--sixty);
+}
+
+.inputContainerLight {
+  border-right: 1px solid var(--thirty);
+}
