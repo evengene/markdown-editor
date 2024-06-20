@@ -30,7 +30,7 @@ export const Wrapper = () => {
     } else if (isMobile) {
       return null;
     } else {
-      return <MarkdownInput/>;
+      return <MarkdownPreview/>;
     }
   }
 
