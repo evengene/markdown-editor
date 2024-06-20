@@ -52,7 +52,6 @@ export const Sidebar = () => {
   }, [dispatch, sidebarOpen]);
 
   const handleDocClick = (id: string) => () => {
-    debugger;
     console.log('clicked 111111');
     console.log(id);
     dispatch(selectDocument(id));

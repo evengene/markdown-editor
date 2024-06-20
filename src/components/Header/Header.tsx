@@ -22,15 +22,27 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 import { DEFAULT_DOCUMENT_NAME, EMPTY_STRING } from '../../constants/shared';
 import { useIsTablet } from "../../hooks/useIsTablet";
+import { useIsMobile } from '../../hooks/useIsMobile';
 
+const BurgerMenuIcon = ({isMobile}: {isMobile: boolean}) => (
+  <svg
+    width={isMobile ? '23' : '30'}
+    height="18"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g fill="#FFF" fill-rule="evenodd">
+      <path d="M0 0h30v2H0zM0 8h30v2H0zM0 16h30v2H0z"/>
+    </g>
+  </svg>);
 
 export const Header = () => {
 
   const dispatch = useDispatch();
-  const { sidebarOpen } = useAppSelector(( state ) => state.sidebar);
-  const { status } = useAppSelector(( state ) => state.markdown);
-  const { id, name, content, } = useAppSelector(( state ) => state.markdown);
-  const {isTablet } = useIsTablet();
+  const { sidebarOpen } = useAppSelector((state) => state.sidebar);
+  const { status } = useAppSelector((state) => state.markdown);
+  const { id, name, content, } = useAppSelector((state) => state.markdown);
+  const { isTablet } = useIsTablet();
+  const { isMobile } = useIsMobile();
   const handleSave = () => {
     if (id === 0) {
       const newId = uuidv4();
@@ -48,7 +60,7 @@ export const Header = () => {
     }
   };
 
-  const onInputChange = ( e: ChangeEvent<HTMLInputElement> ) => {
+  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(dispatch(setDocTitle(e.target.value)));
     console.log(e.target.value);
   }
@@ -97,23 +109,21 @@ export const Header = () => {
             onClick={() => dispatch(toggleSidebar())}
             className={styles.burger}
           >
-            <Image
-              src={sidebarOpen ? closeIcon : burgerIcon}
-              alt="menu"
-            />
+            <BurgerMenuIcon isMobile={isMobile}/>
           </button>
         </div>
 
-        { !isTablet && (
+        {!isTablet && (
           <>
             <Image
               src={logo}
               alt="Markdown Editor"
             />
-            <span className={styles.divider} />
+            <span className={styles.divider}/>
           </>
         )}
 
+        { (  !isMobile || (!sidebarOpen && isMobile)) && (
         <div className={styles.listItem}>
           <Image
             className={styles.icon}
@@ -130,6 +140,7 @@ export const Header = () => {
             />
           </div>
         </div>
+        )}
       </div>
       {!sidebarOpen &&
         <div className={styles.row}>
@@ -142,12 +153,27 @@ export const Header = () => {
               alt="delete"
             />
           </button>
-          <button
-            className={styles.saveButton}
-            onClick={handleSave}
-          >
-            {renderButtonContent()}
-          </button>
+          {isMobile
+            ? (
+              <button
+                className={styles.saveButtonMobile}
+                onClick={handleSave}
+              >
+                <Image
+                  src={saveIcon}
+                  alt="saving"
+                />
+              </button>
+            )
+            :
+            (
+              <button
+                className={styles.saveButton}
+                onClick={handleSave}
+              >
+                {renderButtonContent()}
+              </button>
+            )}
         </div>
       }
     </header>

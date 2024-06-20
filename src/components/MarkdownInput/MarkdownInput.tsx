@@ -7,15 +7,11 @@ import { RootState } from '../../store/store';
 
 export const MarkdownInput: FC = () => {
   const dispatch = useDispatch();
-  const { content, theme, showPagePreview } = useSelector((state: RootState) => state.markdown);
+  const { content, theme } = useSelector((state: RootState) => state.markdown);
 
   const onTextAreaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     dispatch(setText(event.target.value));
   };
-
-  if (showPagePreview) {
-    return null;
-  }
 
   return (
     <div className={`${commonStyles.container} ${styles.inputContainer} 

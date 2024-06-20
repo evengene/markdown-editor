@@ -172,7 +172,6 @@ export const markdownSlice = createSlice({
       state.id = uuidv4();
     },
     selectDocument: (state, action: PayloadAction<string>) => {
-      debugger;
       const documentId = action.payload;
       const selectedDocument = state.documents.find(doc => doc.id === documentId);
       if (selectedDocument) {
